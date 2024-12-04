@@ -44,7 +44,7 @@ import consts._
 
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-class MulFullRawFN(expWidth: Int, sigWidth: Int) extends chisel3.RawModule
+class MulFullRawFN(expWidth: Int, sigWidth: Int) extends RawModule
 {
     val io = IO(new Bundle {
         val a = Input(new RawFloat(expWidth, sigWidth))
@@ -63,7 +63,7 @@ class MulFullRawFN(expWidth: Int, sigWidth: Int) extends chisel3.RawModule
     val common_sigOut = (io.a.sig * io.b.sig)(sigWidth*2 - 1, 0)
     /*------------------------------------------------------------------------
     *------------------------------------------------------------------------*/
-    io.invalidExc := isSigNaNRawFloat(io.a) || isSigNaNRawFloat(io.b) || notSigNaN_invalidExc
+    io.invalidExc := io.a.isSigNaN || io.b.isSigNaN || notSigNaN_invalidExc
     io.rawOut.isInf := notNaN_isInfOut
     io.rawOut.isZero := notNaN_isZeroOut
     io.rawOut.sExp := common_sExpOut
@@ -72,7 +72,7 @@ class MulFullRawFN(expWidth: Int, sigWidth: Int) extends chisel3.RawModule
     io.rawOut.sig := common_sigOut
 }
 
-class MulRawFN(expWidth: Int, sigWidth: Int) extends chisel3.RawModule
+class MulRawFN(expWidth: Int, sigWidth: Int) extends RawModule
 {
     val io = IO(new Bundle {
         val a = Input(new RawFloat(expWidth, sigWidth))
@@ -97,7 +97,7 @@ class MulRawFN(expWidth: Int, sigWidth: Int) extends chisel3.RawModule
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 
-class MulRecFN(expWidth: Int, sigWidth: Int) extends chisel3.RawModule
+class MulRecFN(expWidth: Int, sigWidth: Int) extends RawModule
 {
     val io = IO(new Bundle {
         val a = Input(UInt((expWidth + sigWidth + 1).W))

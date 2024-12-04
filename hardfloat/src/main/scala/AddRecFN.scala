@@ -118,7 +118,8 @@ class AddRawFN(expWidth: Int, sigWidth: Int) extends RawModule
     val common_sigOut = Mux(closeSubMags, close_sigOut, far_sigOut)
     /*------------------------------------------------------------------------
     *------------------------------------------------------------------------*/
-    io.invalidExc := isSigNaNRawFloat(io.a) || isSigNaNRawFloat(io.b) || notSigNaN_invalidExc
+    // io.invalidExc := isSigNaNRawFloat(io.a) || isSigNaNRawFloat(io.b) || notSigNaN_invalidExc
+    io.invalidExc := io.a.isSigNaN || io.b.isSigNaN || notSigNaN_invalidExc
     io.rawOut.isInf := notNaN_isInfOut
     io.rawOut.isZero := notNaN_isZeroOut
     io.rawOut.sExp := common_sExpOut

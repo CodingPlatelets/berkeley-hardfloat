@@ -256,8 +256,8 @@ class
         ! rawA_S.isNaN && ! rawA_S.isZero && rawA_S.sign
     val majorExc_S =
         Mux(io.sqrtOp,
-            isSigNaNRawFloat(rawA_S) || notSigNaNIn_invalidExc_S_sqrt,
-            isSigNaNRawFloat(rawA_S) || isSigNaNRawFloat(rawB_S) ||
+            rawA_S.isSigNaN || notSigNaNIn_invalidExc_S_sqrt,
+            rawA_S.isSigNaN || rawB_S.isSigNaN ||
                 notSigNaNIn_invalidExc_S_div ||
                 (! rawA_S.isNaN && ! rawA_S.isInf && rawB_S.isZero)
         )

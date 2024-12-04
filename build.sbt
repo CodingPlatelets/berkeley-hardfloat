@@ -1,23 +1,19 @@
 organization := "edu.berkeley.cs"
 
-version := "1.5-SNAPSHOT"
+version := "1.5.1-SNAPSHOT"
 
 name := "hardfloat"
 
-scalaVersion := "2.13.10"
-
-resolvers ++= Seq(
-  Resolver.sonatypeRepo("snapshots"),
-  Resolver.sonatypeRepo("releases")
-)
-
+// build.sbt
+scalaVersion := "2.13.12"
 Compile / scalaSource := baseDirectory.value / "hardfloat/src/main/scala"
 Test / scalaSource := baseDirectory.value / "hardfloat/tests/src"
 Test / resourceDirectory := baseDirectory.value / "hardfloat/tests/resources"
 
-addCompilerPlugin("edu.berkeley.cs" % "chisel3-plugin" % "3.5.6" cross CrossVersion.full)
-libraryDependencies += "edu.berkeley.cs" %% "chisel3" % "3.5.6"
-libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.2.0" % "test")
+val chiselVersion = "6.2.0"
+addCompilerPlugin("org.chipsalliance" % "chisel-plugin" % chiselVersion cross CrossVersion.full)
+libraryDependencies += "org.chipsalliance" %% "chisel" % chiselVersion
+// libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.2.0" % "test")
 libraryDependencies += "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.4"
 Test / testForkedParallel := true
 
@@ -53,13 +49,3 @@ pomExtra := <url>http://chisel.eecs.berkeley.edu/</url>
     </developer>
   </developers>
 
-publishTo := {
-  val v = version.value
-  val nexus = "https://oss.sonatype.org/"
-  if (v.trim.endsWith("SNAPSHOT")) {
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  }
-  else {
-    Some("releases" at nexus + "service/local/staging/deploy/maven2")
-  }
-}

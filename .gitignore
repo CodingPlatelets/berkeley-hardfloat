@@ -1,4 +1,9 @@
-project/target
+project/
 target
 test_run_dir
 out
+.bloop/
+.github/
+.idea/
+.metals/
+.vscode/

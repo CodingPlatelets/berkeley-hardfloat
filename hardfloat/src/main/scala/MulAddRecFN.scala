@@ -143,8 +143,7 @@ class MulAddRecFNToRaw_preMul(expWidth: Int, sigWidth: Int) extends RawModule
     io.mulAddC := alignedSigC(sigWidth * 2, 1)
 
     io.toPostMul.isSigNaNAny :=
-        isSigNaNRawFloat(rawA) || isSigNaNRawFloat(rawB) ||
-            isSigNaNRawFloat(rawC)
+        rawA.isSigNaN || rawB.isSigNaN || rawC.isSigNaN
     io.toPostMul.isNaNAOrB := rawA.isNaN || rawB.isNaN
     io.toPostMul.isInfA    := rawA.isInf
     io.toPostMul.isZeroA   := rawA.isZero

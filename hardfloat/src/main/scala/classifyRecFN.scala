@@ -46,7 +46,7 @@ object classifyRecFN
         val minNormExp: BigInt = (BigInt(1)<<(expWidth - 1)) + 2
 
         val rawIn: RawFloat = rawFloatFromRecFN(expWidth, sigWidth, in)
-        val isSigNaN: Bool = isSigNaNRawFloat(rawIn)
+        val isSigNaN: Bool = rawIn.isSigNaN
         val isFiniteNonzero: Bool = ! rawIn.isNaN && ! rawIn.isInf && ! rawIn.isZero
         val isSubnormal: Bool = rawIn.sExp < minNormExp.S
 

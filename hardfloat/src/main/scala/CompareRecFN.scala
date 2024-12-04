@@ -72,7 +72,7 @@ class CompareRecFN(expWidth: Int, sigWidth: Int) extends RawModule
         bothZeros || ((rawA.sign === rawB.sign) && (bothInfs || common_eqMags))
 
     val invalid =
-        isSigNaNRawFloat(rawA) || isSigNaNRawFloat(rawB) ||
+        rawA.isSigNaN || rawB.isSigNaN ||
             (io.signaling && ! ordered)
 
     io.lt := ordered && ordered_lt

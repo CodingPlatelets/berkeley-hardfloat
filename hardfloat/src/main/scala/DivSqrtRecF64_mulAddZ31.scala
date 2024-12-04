@@ -174,8 +174,8 @@ class DivSqrtRecF64ToRaw_mulAddZ31 extends Module
         ! rawB_S.isNaN && ! rawB_S.isZero && rawB_S.sign
     val majorExc_S =
         Mux(io.sqrtOp,
-            isSigNaNRawFloat(rawB_S) || notSigNaNIn_invalidExc_S_sqrt,
-            isSigNaNRawFloat(rawA_S) || isSigNaNRawFloat(rawB_S) ||
+            rawB_S.isSigNaN || notSigNaNIn_invalidExc_S_sqrt,
+            rawA_S.isSigNaN || rawB_S.isSigNaN ||
                 notSigNaNIn_invalidExc_S_div ||
                 (! rawA_S.isNaN && ! rawA_S.isInf && rawB_S.isZero)
         )

@@ -62,7 +62,7 @@ class
         //--------------------------------------------------------------------
         //--------------------------------------------------------------------
         io.out            := io.in<<(outSigWidth - inSigWidth)
-        io.exceptionFlags := isSigNaNRawFloat(rawIn) ## 0.U(4.W)
+        io.exceptionFlags := rawIn.isSigNaN ## 0.U(4.W)
 
     } else {
 
@@ -77,7 +77,7 @@ class
                         outSigWidth,
                         flRoundOpt_sigMSBitAlwaysZero
                     ))
-        roundAnyRawFNToRecFN.io.invalidExc     := isSigNaNRawFloat(rawIn)
+        roundAnyRawFNToRecFN.io.invalidExc     := rawIn.isSigNaN
         roundAnyRawFNToRecFN.io.infiniteExc    := false.B
         roundAnyRawFNToRecFN.io.in             := rawIn
         roundAnyRawFNToRecFN.io.roundingMode   := io.roundingMode
