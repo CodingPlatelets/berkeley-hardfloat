@@ -15,6 +15,7 @@ addCompilerPlugin("org.chipsalliance" % "chisel-plugin" % chiselVersion cross Cr
 libraryDependencies += "org.chipsalliance" %% "chisel" % chiselVersion
 // libraryDependencies ++= Seq("org.scalatest" %% "scalatest" % "3.2.0" % "test")
 libraryDependencies += "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.4"
+libraryDependencies += "edu.berkeley.cs" %% "chiseltest" % "6.0.0"
 Test / testForkedParallel := true
 
 publishMavenStyle := true
