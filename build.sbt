@@ -6,9 +6,9 @@ name := "hardfloat"
 
 // build.sbt
 scalaVersion := "2.13.12"
-Compile / scalaSource := baseDirectory.value / "hardfloat/src/main/scala"
-Test / scalaSource := baseDirectory.value / "hardfloat/tests/src"
-Test / resourceDirectory := baseDirectory.value / "hardfloat/tests/resources"
+Compile / scalaSource := baseDirectory.value / "hardfloat" / "main" / "scala"
+Test / scalaSource := baseDirectory.value / "hardfloat" / "tests" / "src"
+Test / resourceDirectory := baseDirectory.value / "hardfloat" / "tests" / "resources"
 
 val chiselVersion = "6.2.0"
 addCompilerPlugin("org.chipsalliance" % "chisel-plugin" % chiselVersion cross CrossVersion.full)
@@ -19,7 +19,7 @@ libraryDependencies += "edu.berkeley.cs" %% "chiseltest" % "6.0.0"
 Test / testForkedParallel := true
 
 publishMavenStyle := true
-publishArtifact in Test := false
+// publishArtifact in Test := false
 pomIncludeRepository := { x => false }
 // Don't add 'scm' elements if we have a git.remoteRepo definition,
 //  but since we don't (with the removal of ghpages), add them in below.
